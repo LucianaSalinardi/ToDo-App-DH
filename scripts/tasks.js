@@ -120,7 +120,7 @@ window.addEventListener("load", function () {
   formCrearTarea.addEventListener("submit", function (event) {
     const inputNuevaTarea = document.getElementById("nuevaTarea");
 
-    const inputTarea = normalizarTextoTarea(inputNuevaTarea.value);
+    const inputTarea = normalizarPrimerLetraEnMayuscula(inputNuevaTarea.value);
     event.preventDefault();
 
     const datosTarea = {

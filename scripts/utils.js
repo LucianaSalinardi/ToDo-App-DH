@@ -1,6 +1,3 @@
-function normalizarTextoTarea(texto) {
-  return texto.toLowerCase();
-}
 
 function validarEmail(email) {
   normalizarEmail(email);
@@ -28,6 +25,6 @@ function compararContrasenias(contrasenia_1, contrasenia_2) {
   return contrasenia_1 === contrasenia_2;
 }
 
-function normalizarNombreApellido(nombre) {
-  return nombre.charAt(0).toUpperCase() + nombre.slice(1);
+function normalizarPrimerLetraEnMayuscula(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
