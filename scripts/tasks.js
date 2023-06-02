@@ -118,50 +118,57 @@ window.addEventListener("load", function () {
   // Crear nueva tarea
 
   formCrearTarea.addEventListener("submit", function (event) {
-    const inputNuevaTarea = document.getElementById("nuevaTarea");
+    
 
-    const inputTarea = normalizarPrimerLetraEnMayuscula(inputNuevaTarea.value);
     event.preventDefault();
+    const inputNuevaTarea = document.getElementById("nuevaTarea");
+    const inputValue = inputNuevaTarea.value.trim();
 
-    const datosTarea = {
-      description: inputTarea,
-      completed: false,
-    };
 
-    const configuraciones = {
-      method: "POST",
-      headers: {
-        authorization: token,
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(datosTarea),
-    };
+    if(inputValue != null && inputValue != ""){
+      const inputTarea = normalizarPrimerLetraEnMayuscula(inputValue);
 
-    fetch(urlTareas, configuraciones)
-      .then((response) => {
-        if (response.status == 400) {
-          console.log("Alguno de los datos requeridos está incompleto");
-        }
-
-        if (response.status == 401) {
-          console.log("Requiere Autorización");
-        }
-
-        if (response.status == 500) {
-          console.log("Error del servidor");
-          location.href = "./server-error.html";
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        consultarTareas();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    formCrearTarea.reset();
+      const datosTarea = {
+        description: inputTarea,
+        completed: false,
+      };
+  
+      const configuraciones = {
+        method: "POST",
+        headers: {
+          authorization: token,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(datosTarea),
+      };
+  
+      fetch(urlTareas, configuraciones)
+        .then((response) => {
+          if (response.status == 400) {
+            console.log("Alguno de los datos requeridos está incompleto");
+          }
+  
+          if (response.status == 401) {
+            console.log("Requiere Autorización");
+          }
+  
+          if (response.status == 500) {
+            console.log("Error del servidor");
+            location.href = "./server-error.html";
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          consultarTareas();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  
+      formCrearTarea.reset();
+    }
+    
   });
 
   //Renderizar tareas en pantalla

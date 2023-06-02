@@ -4,10 +4,13 @@ window.addEventListener("load", function () {
   const passwordError = document.getElementById("errorPassword");
 
   form.addEventListener("submit", function (event) {
+
+    event.preventDefault();
     const inputEmail = document.getElementById("inputEmail");
     const inputPassword = document.getElementById("inputPassword");
 
-    event.preventDefault();
+    const inputEmailValue = inputEmail.value.trim();
+    const inputPasswordValue = inputPassword.value.trim();
 
     if (passwordError.lastChild.nodeName == "P") {
       passwordError.removeChild(passwordError.lastChild);
@@ -15,22 +18,28 @@ window.addEventListener("load", function () {
 
     mostrarSpinner();
     setTimeout(() => {
-      const datos = {
-        email: inputEmail.value,
-        password: inputPassword.value,
-      };
 
-      const settings = {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify(datos),
-      };
-
-      realizarLogin(settings);
-
-      form.reset();
+      if((inputEmailValue != null && inputEmailValue != "") && inputPasswordValue != null && inputPasswordValue != ""){
+        const datos = {
+          email: inputEmailValue,
+          password: inputPasswordValue,
+        };
+  
+        const settings = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify(datos),
+        };
+  
+        realizarLogin(settings);
+  
+        form.reset();
+      }else{
+        ocultarSpinner();
+      }
+      
     }, 3000);
   });
 

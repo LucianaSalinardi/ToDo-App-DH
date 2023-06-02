@@ -36,10 +36,10 @@ window.addEventListener("load", function () {
 
     setTimeout(() => {
       const datos = {
-        firstName: normalizarPrimerLetraEnMayuscula(inputNombre.value),
-        lastName: normalizarPrimerLetraEnMayuscula(inputApellido.value),
-        email: inputEmail.value,
-        password: inputPassword.value,
+        firstName: normalizarPrimerLetraEnMayuscula(inputNombre.value.trim()),
+        lastName: normalizarPrimerLetraEnMayuscula(inputApellido.value.trim()),
+        email: inputEmail.value.trim(),
+        password: inputPassword.value.trim(),
       };
 
       const settings = {
